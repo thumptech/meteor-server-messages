@@ -1,6 +1,6 @@
 /* global ChannelListener:true*/
 
-ChannelListener = function (channel, collection) {
+export const ChannelListener = function (channel, collection) {
   this.handlers = [];
   this.channel = channel;
 

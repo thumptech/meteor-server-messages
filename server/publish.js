@@ -1,5 +1,6 @@
 /* global publishMethods:true*/
-
+import {Meteor} from 'meteor/meteor'
+import {Internals} from "../shared/internals";
 
 /***
  * Namespace containing the publishes for the package.
@@ -15,7 +16,7 @@ publishMethods = {
    * @returns {any|Cursor}
    */
   'ServerMessages/publishMessages': function (instanceName) {
-    var timestamp = (new Date().getTime()) - Internals.constants.MAX_TIMESTAMP_AGE;
+    const timestamp = (new Date().getTime()) - Internals.constants.MAX_TIMESTAMP_AGE;
 
     return Internals.collection.find({
       instanceName: instanceName,

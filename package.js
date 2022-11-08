@@ -14,28 +14,24 @@ Package.onUse(function(api) {
     'underscore'
   ]);
 
+  //This is needed for ES6 imports/exports to work
+  api.use('ecmascript');
+
+  api.mainModule('shared/servermessages.js');
+
   api.addFiles([
     'shared/internals.js',
-    'shared/serverMessages.js'
   ]);
 
   api.addFiles([
     'client/channelListener.js',
-    'client/serverMessages.js'
   ], 'client');
 
   api.addFiles([
-    'server/serverMessages.js',
     'server/publish.js'
   ], 'server');
 
-  api.export('ServerMessages');
-
-  api.export([
-    'ChannelListener',
-    'Internals',
-    'publishMethods'
-  ], {testOnly:true});
+  //api.export('ServerMessages');
 });
 
 Package.onTest(function(api) {
