@@ -11,6 +11,7 @@ export const ChannelListener = function (channel, collection) {
   });
 };
 
+
 ChannelListener.prototype.addHandler = function (handler) {
   this.handlers.push(handler);
 };

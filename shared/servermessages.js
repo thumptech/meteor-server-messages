@@ -65,6 +65,33 @@ export class ServerMessages {
     Internals.collection.insert({
       instanceName: this._name,
       channel: channel,
+      user:'*',
+      arguments: args,
+      timestamp: (new Date().getTime())
+    });
+  }
+
+  /***
+   * Notifies specific listener of the given channel.
+   * All other arguments are passed on to the listeners
+   *
+   * @param channel the channel to notify
+   * @param userQuery the user to notify
+   */
+  notifyUser(channel, userQuery) {
+    console.log(`ServerMessages.notifyUser`)
+    if (Meteor.isClient) return;
+    const user = Meteor.users.findOne(userQuery);
+    if(!user)return;
+    const args = [].slice.call(arguments);
+    args.splice(0, 2);
+
+    this._cleanupOldMessages();
+
+    Internals.collection.insert({
+      instanceName: this._name,
+      channel: channel,
+      user:user._id,
       arguments: args,
       timestamp: (new Date().getTime())
     });

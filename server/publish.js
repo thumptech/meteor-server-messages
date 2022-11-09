@@ -16,9 +16,11 @@ publishMethods = {
    * @returns {any|Cursor}
    */
   'ServerMessages/publishMessages': function (instanceName) {
+    console.log(`server publish ${instanceName}`);
     const timestamp = (new Date().getTime()) - Internals.constants.MAX_TIMESTAMP_AGE;
 
     return Internals.collection.find({
+      user: {$in:['*', Meteor.userId()]},
       instanceName: instanceName,
       timestamp: {$gt: timestamp}
     });
